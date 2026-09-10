@@ -31,7 +31,7 @@ public class tarefa {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
-    private User user;
+    private user user;
 
     @Column(name = "descricao", length = 255, nullable = false)
     @NotBlank
@@ -42,7 +42,7 @@ public class tarefa {
 
     }
 
-    public tarefa(Long id, User user, String descricao){
+    public tarefa(Long id, user user, String descricao){
         this.Id = id;
         this.user = user;
         this.descricao = descricao;
@@ -53,15 +53,15 @@ public class tarefa {
         return this.Id;
     }
 
-    public void setId(Long Id) {
-        this.Id = Id;
+    public void setId(Long id) {
+        this.Id = id;
     }
 
-    public User getUser() {
+    public user getUser() {
         return this.user;
     }
 
-    public void setUser(User user) {
+    public void setUser(user user) {
         this.user = user;
     }
 

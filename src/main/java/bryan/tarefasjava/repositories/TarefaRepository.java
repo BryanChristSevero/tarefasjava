@@ -18,14 +18,20 @@ import java.util.List;
 @Repository
 public interface TarefaRepository extends JpaRepository<tarefa, Long> {
 
-    // 1. Derived Query: Spring cria o SQL automaticamente pelo nome do método
+    // Método 1: Derived Query Method (padrão recomendado pelo Spring)
+    /* O Spring gera o SQL automaticamente navegando na relação 'user' até o atributo 'id'
+    busca na lista de tarefas aquelas atribuidas a um determinado usuario */ 
     List<tarefa> findByUser_Id(Long id);
 
-    // 2. JPQL: Consulta personalizada orientada a objetos Java/JPA
-    @Query("SELECT t FROM tarefa t WHERE t.user.Id = :id")
-    List<tarefa> findByUser_IdJpl(@Param("id") Long id);
+    // Método 2: JPQL(Java Persistance Qurey Language)
+    /* Consulta baseada na classe tarefa e no atributo 't.user.id', usando o parametro: 'id' ,
+    o atributo id do usuario é passado como argumento do método */
+  // @Query("SELECT t FROM tarefa t WHERE t.user.Id = :id")
+  // List<tarefa> findByUser_IdJpl(@Param("id") Long id);
 
-    // 3. Native Query: Consulta personalizada escrita em SQL direto do banco de dados
-    @Query(value = "SELECT * FROM tarefa WHERE user_id = :id", nativeQuery = true)
-    List<tarefa> findByUser_IdNative(@Param("id") Long id);
+    // Método 3: SQL Nativo( Native SQL Query)
+    /* Consulta SQL Puro direto na tabela tarefas e na coluna de chave estrangeira 'user_id'
+    usa SQL Puro para buscar as tarefas associadas ao id do usuario fornecido */
+   // @Query(value = "SELECT * FROM tarefa WHERE user_id = :id", nativeQuery = true)
+   // List<tarefa> findByUser_IdNative(@Param("id") Long id);
 }
